@@ -16,7 +16,7 @@ namespace Matching_Card_Game_Project
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e)
         {
             int BaseDifficultyValue = 2;
             int DifficultyValue = BaseDifficultyValue * DifficultySelect.SelectedIndex;
@@ -24,11 +24,14 @@ namespace Matching_Card_Game_Project
             int GameRowCount = (DifficultyValue + 2);
             int GameCellCount = GameColumnCount * GameRowCount;
             int CurrentCellCount = 0;
-            _ = (0, 0);
             Label[] TestLabels = new Label[GameCellCount];
+
+            Array.Clear(TestLabels, 0, TestLabels.Length);
 
             GameWindow.ColumnCount = GameColumnCount;
             GameWindow.RowCount = GameRowCount;
+
+            TestLabels = CreateGame(TestLabels);
 
             for (int i = 0; i <= GameWindow.ColumnCount; i++)
             {
@@ -47,9 +50,7 @@ namespace Matching_Card_Game_Project
                     Control CurrentCell = GameWindow.GetControlFromPosition(x, y);
                     if (CurrentCell == null)
                     {
-                        TestLabels[CurrentCellCount] = new Label();
-                        TestLabels[CurrentCellCount].Text = (CurrentCellCount + 1).ToString();
-                        TestLabels[CurrentCellCount].Dock = DockStyle.Fill;
+
                         GameWindow.Controls.Add(TestLabels[CurrentCellCount],x,y);
                     }
                     CurrentCellCount++;
@@ -60,6 +61,42 @@ namespace Matching_Card_Game_Project
 
 
         }
+
+        public Label[] CreateGame(Label[] GameCells) 
+        {
+            int[] RandomNumbers = new int[GameCells.Length];
+            int i = 0;
+            int j = 0;
+            int k = 0;
+            Random RandomNums = new Random();
+
+            for (j = 0; j < GameCells.Length;j++)
+                {
+                RandomNumbers[j] = RandomNums.Next();
+                }
+
+            for (i = 0;i < GameCells.Length;i++) 
+                {
+                if (i + 1 > ((GameCells.Length)/2))
+                    {
+                    k = i - ((GameCells.Length) / 2);
+                    }
+                else
+                {
+                    k = i;
+                }
+                GameCells[i] = new Label();
+                GameCells[i].Text = (k + 1).ToString();
+                GameCells[i].Dock = DockStyle.Fill;
+                GameCells[i].Tag = RandomNumbers[i];
+                }
+
+            Label[] RandomizedLabels = GameCells.OrderBy(GameCells => GameCells.Tag).ToArray();
+
+            return GameCells;
+        }
+
+
 
         public void Form1_Load(object sender, EventArgs e)
         {

@@ -32,6 +32,7 @@
             GameWindow = new TableLayoutPanel();
             button1 = new Button();
             DifficultySelect = new ListBox();
+            label1 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -83,11 +84,21 @@
             DifficultySelect.Size = new Size(120, 94);
             DifficultySelect.TabIndex = 2;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(692, 995);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 3;
+            label1.Text = "label1";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(910, 1079);
+            Controls.Add(label1);
             Controls.Add(DifficultySelect);
             Controls.Add(button1);
             Controls.Add(panel1);
@@ -97,6 +108,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -105,5 +117,6 @@
         private TableLayoutPanel GameWindow;
         private Button button1;
         private ListBox DifficultySelect;
+        private Label label1;
     }
 }
