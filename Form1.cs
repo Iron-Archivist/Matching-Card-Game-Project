@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace Matching_Card_Game
 {
@@ -16,5 +17,23 @@ namespace Matching_Card_Game
         {
             InitializeComponent();
         }
+
+        private void StartGame_Click(object sender, EventArgs e)
+        {
+            var CurrentGame = new GameWindow();
+            if (GameUI.GetControlFromPosition(0, 0) == null)
+            {
+                GameUI.Controls.Add(CurrentGame, 0, 0);
+                CurrentGame.CallGameStart(DifficultySelect.SelectedIndex);
+            }
+            else
+            {
+                GameUI.Controls.RemoveAt(1);
+                GameUI.Controls.Add(CurrentGame, 0, 0);
+                CurrentGame.CallGameStart(DifficultySelect.SelectedIndex);
+            }
+
+        }
+
     }
 }
